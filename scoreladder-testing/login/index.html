@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://www.scoreladder.org/global.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scoreladder Login</title>
+
+  <style>
+    :root {
+    --base-color: #e4e4e4;
+    --primary-color: #b8b8b8;
+    --secondary-color: #a9a9a9;
+    --text-color: #222222;
+}
+.darkmode {
+    --base-color: #303030;
+    --primary-color: #3b3b3b;
+    --secondary-color: #5a5a5a;
+    --text-color: #e4e4e4;
+}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--base-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: var(--primary-color);
+      padding: 30px;
+      border-radius: 12px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    button, a.button {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      margin-left: -12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .discord {
+      background: #5865F2;
+      color: var(--text-color);
+    }
+
+    .logout {
+      background: #ff4d4d;
+      color: var(--text-color);
+    }
+
+    .user-box {
+      margin-top: 15px;
+      padding: 10px;
+      background: var(--secondary-color);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    img.avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- NOT LOGGED IN -->
+    <div id="loginSection">
+      <h1>Login to Scoreladder</h1>
+
+      <a class="button discord"
+         href="https://discord.com/oauth2/authorize?client_id=1511967100485238955&response_type=code&redirect_uri=https%3A%2F%2Fauth.scoreladder.org%2Fauth%2Fdiscord%2Fcallback&scope=identify%20email">
+        Continue with Discord
+      </a>
+    </div>
+
+    <!-- LOGGED IN -->
+    <div id="userSection" class="hidden">
+      <h1>Welcome back</h1>
+
+      <div class="user-box">
+        <img id="avatar" class="avatar" />
+        <div id="username"></div>
+        <div id="email"></div>
+      </div>
+
+      <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+  </div>
+
+  <script>
+    const API = "https://auth.scoreladder.org";
+
+    async function loadUser() {
+      try {
+        const res = await fetch(`${API}/me`, {
+          credentials: "include"
+        });
+
+        if (!res.ok) return;
+
+        const user = await res.json();
+
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("userSection").classList.remove("hidden");
+
+        document.getElementById("username").innerText =
+          user.display_name || user.username;
+
+        document.getElementById("email").innerText =
+          user.email || "";
+
+        document.getElementById("avatar").src =
+          user.avatar
+            ? `https://cdn.discordapp.com/avatars/${user.id.replace("discord_", "")}/${user.avatar}.png`
+            : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+      } catch (e) {
+        console.log("Not logged in");
+      }
+    }
+
+    async function logout() {
+      await fetch(`${API}/logout`, {
+        credentials: "include"
+      });
+
+      location.reload();
+    }
+
+    loadUser();
+  </script>
+<script src="https://www.scoreladder.org/components/layout.js" defer></script>
+
+<div id="header"></div>
+<div id="footer"></div>
+</body>
+</html>

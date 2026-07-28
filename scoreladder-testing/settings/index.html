@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../global.css">
+  <title>Settings</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f0f12;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #1a1a22;
+      padding: 20px;
+      border-radius: 12px;
+      width: 320px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #5865F2;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Settings</h2>
+
+  <textarea id="displayName" placeholder="Display Name"></textarea>
+
+  <textarea id="bio" placeholder="Bio"></textarea>
+  <input id="banner" placeholder="Banner image URL">
+  <input id="twitter" placeholder="Twitter URL">
+  <input id="instagram" placeholder="Instagram URL">
+  <input id="youtube" placeholder="YouTube URL">
+  <input id="website" placeholder="Website URL">
+  
+  <button onclick="save()">Save</button>
+  <button onclick="back()">View Profile</button>
+</div>
+
+<script src="load-and-save-settings.js"></script>
+<script src="../components/layout.js" defer></script>
+
+<div id="header"></div>
+<div id="footer"></div>
+</body>
+</html>
