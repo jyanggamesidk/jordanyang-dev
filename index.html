@@ -30,6 +30,12 @@
       --game-dim:     #10b981;
       --game-surface: #0d1f1a;
       --game-border:  #1a3530;
+
+      /* other — blue */
+      --other:        #60a5fa;
+      --other-dim:    #3b82f6;
+      --other-surface: #0d1a2a;
+      --other-border:  #1a2f4d;
     }
 
     :root[data-theme="light"] {
@@ -55,6 +61,12 @@
       --game-dim:     #047857;
       --game-surface: #ecfdf5;
       --game-border:  #a7f3d0;
+      
+      /* other dev — blue */
+      --other:        #2563eb;
+      --other-dim:    #1e40af;
+      --other-surface: #eff6ff;
+      --other-border:  #93c5fd;
     }
 
     /* ── Reset ── */
@@ -127,8 +139,15 @@
       background: var(--game-surface);
     }
 
+    nav .nav-link.other {
+      color: var(--other);
+      border-color: var(--other-border);
+      background: var(--other-surface);
+    }
+
     nav .nav-link.web:hover  { border-color: var(--web-dim);  filter: brightness(1.15); }
     nav .nav-link.game:hover { border-color: var(--game-dim); filter: brightness(1.15); }
+    nav .nav-link.other:hover { border-color: var(--other-dim); filter: brightness(1.15); }
 
     /* ── Theme toggle ── */
     #theme-toggle {
@@ -186,6 +205,7 @@
 
     #web  h1 { color: var(--web);  border-bottom: 1px solid var(--web-border); }
     #games h1 { color: var(--game); border-bottom: 1px solid var(--game-border); }
+    #other h1 { color: var(--other); border-bottom: 1px solid var(--other-border); }
 
     /* ── Cards ── */
     .card {
@@ -197,9 +217,11 @@
 
     #web   .card { background: var(--web-surface);  border: 1px solid var(--web-border); }
     #games .card { background: var(--game-surface); border: 1px solid var(--game-border); }
+    #other .card { background: var(--other-surface); border: 1px solid var(--other-border); }
 
     #web   .card:hover { border-color: var(--web-dim);  transform: translateY(-2px); }
     #games .card:hover { border-color: var(--game-dim); transform: translateY(-2px); }
+    #other .card:hover { border-color: var(--other-dim); transform: translateY(-2px); }
 
     .card > a {
       font-size: 1.05rem;
@@ -213,6 +235,7 @@
 
     #web   .card > a { color: var(--web); }
     #games .card > a { color: var(--game); }
+    #other .card > a { color: var(--other); }
 
     .card > a::after {
       content: '↗';
@@ -258,13 +281,14 @@
     <a class="brand" href="#">Jordan Yang</a>
     <a class="nav-link web"  href="#web">Web Dev</a>
     <a class="nav-link game" href="#games">Game Dev</a>
+    <a class="nav-link other" href="#other">Other</a>
     <button id="theme-toggle" title="Toggle dark / light mode" aria-label="Toggle dark/light mode">☀</button>
   </nav>
 
   <main>
 
     <div class="hero">
-      <h2>Welcome to my <span>website/portfolio!</span><br>This is where I showcase the stuff I've built.</h2>
+      <h2>Welcome to my <span>website/portfolio!</span><br>This is where I showcase the stuff I've built and/or founded and the stuff I'm working on.</h2>
     </div>
 
     <section id="web">
@@ -294,6 +318,16 @@
         <a href="https://oakdoor.itch.io/the-maze-of-eternity" target="_blank" rel="noopener">The Maze of Eternity</a>
         <p>One of the first games I've built on my own. It's unfinished, and I lost the save files as well after the incident with Idle Core. The entire point is to beat these incredibly long mazes while collecting every coin.</p>
       </div>
+    </section>
+    
+    <section id="other">
+      <h1>Other Projects</h1>
+
+      <div class="card">
+        <a target="_blank" rel="noopener">0.73 (This Project will take at least a year or two to complete!)</a>
+        <p>What if another species had evolved to be the dominant one? How would their society look like? What would their tech look like? What if that species isn't even alive?</p>
+      </div>
+
     </section>
 
   </main>
